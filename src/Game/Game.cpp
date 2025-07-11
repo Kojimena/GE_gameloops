@@ -34,9 +34,8 @@ void Game::setup() {
 
     ball = Rectangle{10, 100, 15, 15};
     paddle = Rectangle{(float)(screen_width/2) - ball.width*5, (float)screen_height - 15, ball.width*10, 15};
-    int rows = 1;
-    int cols = 1;
-    int blocksLeft = rows * cols;
+    int rows = 5;
+    int cols = 10;
     float blockWidth = screen_width / cols;
     float blockHeight = 20;
 
