@@ -35,7 +35,7 @@ void Game::setup() {
     ball = Rectangle{10, 100, 15, 15};
     paddle = Rectangle{(float)(screen_width/2) - ball.width*5, (float)screen_height - 15, ball.width*10, 15};
     int rows = 5;
-    int cols = 10;
+    int cols = 8;
     float blockWidth = screen_width / cols;
     float blockHeight = 20;
 
@@ -91,7 +91,7 @@ void Game::handle_events() {
 }
 
 void Game::update() {
-    float dT = GetFrameTime();  // seconds
+    float dT = GetFrameTime();
     if (ball.x >= screen_width) {
         ball_sx *= -1;
     }
@@ -99,12 +99,14 @@ void Game::update() {
         ball_sx *= -1;
     }
     if (ball.y >= screen_height) {
-        std::cout << "Game over" << std::endl;
+        std::cout << "Game over:(" << std::endl;
         exit(1);
     }
     if (CheckCollisionRecs(ball, paddle)) {
+        float hitPos = (ball.x + ball.width / 2.0f) - (paddle.x + paddle.width / 2.0f);
+        float normalized = hitPos / (paddle.width / 2.0f);
+        ball_sx = normalized * 200;
         ball_sy *= -1;
-        ball_sx = paddle_sx;
     }
     if (ball.y < 0) {
         ball_sy *= -1;
